@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonial Slider</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="testimonial-container">
+        <div class="testimonial">
+            <img src="image/7059b05297b2de0c67e18d6509eef339.png" alt="User Photo" class="profile-photo">
+            <p class="testimonial-text">"On the Windows talking painted pasture yet its express parties use. Sure last
+                upon he same as knew next. Of believed or diverted no."</p>
+            <h3 class="user-name">Mike Taylor</h3>
+            <p class="user-location">Lahore, Pakistan</p>
+        </div>
+        <div class="testimonial">
+            <p class="user-name">Chris Thomas</p>
+            <p class="user-role">CEO of Red Button</p>
+        </div>
+        <button class="arrow" id="prev">‹</button>
+        <button class="arrow" id="next">›</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .testimonial-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 400px;
+        margin: auto;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .testimonial {
+        display: none;
+        text-align: center;
+    }
+
+    .testimonial.active {
+        display: block;
+    }
+
+    .profile-photo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .testimonial-text {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .user-name {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    .user-location,
+    .user-role {
+        font-size: 12px;
+        color: gray;
+    }
+
+    .arrow {
+        background: none;
+        border: none;
+        font-size: 24px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    #prev {
+        left: 10px;
+    }
+
+    #next {
+        right: 10px;
+    }
+</style>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let currentIndex = 0;
+        const testimonials = document.querySelectorAll('.testimonial');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.classList.remove('active');
+                if (i === index) {
+                    testimonial.classList.add('active');
+                }
+            });
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : testimonials.length - 1;
+            showTestimonial(currentIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex < testimonials.length - 1) ? currentIndex + 1 : 0;
+            showTestimonial(currentIndex);
+        });
+
+        showTestimonial(currentIndex); // Initialize with the first testimonial
+    });
+
+</script>
